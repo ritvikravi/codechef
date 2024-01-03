@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define ll long long
+#define vll ll*
+
+void sort(vll arr, ll n) {
+    for (ll i = 0; i < n; i++) {
+        for (ll j = i + 1; j < n; j++) {
+            if (arr[i] < arr[j]) {
+                ll temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+void reverse(vll arr, ll n) {
+    for (ll i = 0; i < n / 2; i++) {
+        ll temp = arr[i];
+        arr[i] = arr[n - i - 1];
+        arr[n - i - 1] = temp;
+    }
+}
+
+int main() {
+    ll t;
+    scanf("%lld", &t);
+    while (t--) {
+        ll n;
+        scanf("%lld", &n);
+        ll maxx = LLONG_MIN;
+        ll minn = LLONG_MAX;
+        vll a = (vll)malloc(n * sizeof(ll));
+        vll b = (vll)malloc(n * sizeof(ll));
+        for (ll i = 0; i < n; i++) {
+            scanf("%lld", &a[i]);
+            if (a[i] > maxx) {
+                maxx = a[i];
+            }
+        }
+        for (ll i = 0; i < n; i++) {
+            scanf("%lld", &b[i]);
+            if (b[i] < minn) {
+                minn = b[i];
+            }
+        }
+        ll sum = maxx + minn;
+        int flag = 0;
+        sort(a, n);
+        reverse(a, n);
+        sort(b, n);
+        for (ll i = 0; i < n; i++) {
+            if (a[i] + b[i] != sum) {
+                printf("-1\n");
+                flag = 1;
+                break;
+            }
+        }
+        if (!flag) {
+            for (ll i = 0; i < n; i++) {
+                printf("%lld ", a[i]);
+            }
+            printf("\n");
+            for (ll i = 0; i < n; i++) {
+                printf("%lld ", b[i]);
+            }
+            printf("\n");
+        }
+        free(a);
+        free(b);
+    }
+    return 0;
+}
