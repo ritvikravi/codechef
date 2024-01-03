@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+	
+	int t;
+    scanf("%d", &t);
+    while (t--) {
+        int n, x, y;
+        scanf("%d %d %d", &n, &x, &y);
+        int leaves = y / 3;
+        int x_left, leaves1;
+        if (x >= leaves) {
+            x_left = x - leaves;
+            leaves1 = leaves;
+        } else {
+            x_left = 0;
+            leaves1 = x;
+        }
+        int leaves2 = x_left / 2;
+        if (leaves2 + leaves1 >= n) {
+            printf("YES\n");
+        } else {
+            printf("NO\n");
+        }
+    }
+    return 0;
+}
